@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <br >
+    <br >
+    <h2 id="result"></h2>
+    <br >
+    <br >
+    <p id="win"></p>
+    <p id="loss"></p>
+    <p id="draw"></p>
+    <script>
+        function computerPlay () {
+            play = ["Rock", "Paper", "Scissors"];
+            return play[Math.floor(Math.random() * 3)];
+        }
+        function playRound (playerSelection, computerSelection) {
+            let result;
+            switch(playerSelection.toLowerCase()) {
+                case 'rock': {
+                    switch (computerSelection) {
+                        case 'Rock': {
+                            result = 'd';
+                            console.log("Alright, we'll call it a draw!");
+                            break;
+                        }
+                        case 'Paper': {
+                            result = 'l';
+                            console.log("You lose!");
+                            break;
+                        }
+                        case 'Scissors': {
+                            result = 'w';
+                            console.log("Winner!!!");
+                            break;
+                        }
+                    }                    
+                    break;
+                }
+                case 'paper': {
+                    switch (computerSelection) {
+                        case 'Rock': {
+                            result = 'w';
+                            console.log("Winner!!!");
+                            break;
+                        }
+                        case 'Paper': {
+                            result = 'd';
+                            console.log("Alright, we'll call it a draw!");
+                            break;
+                        }
+                        case 'Scissors': {
+                            result = 'l';
+                            console.log("You lose!");
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case 'scissors': {
+                    switch (computerSelection) {
+                        case 'Rock': {
+                            result = 'l';
+                            console.log("You lose!");
+                            break;
+                        }
+                        case 'Paper': {
+                            result = 'w';
+                            console.log("Winner!!!");
+                            break;
+                        }
+                        case 'Scissors': {
+                            result = 'd';
+                            console.log("Alright, we'll call it a draw!");
+                            break;
+                        }
+                    }
+                    break;
+                }
+                default: {
+                    result = 'Error';                    
+                }                
+            }//end switch
+            return result;
+        }
+
+        function game () {
+            numRounds = parseInt(window.prompt("Play how many rounds?"));
+            let plyr = 0; 
+            let com = 0; 
+            let drw = 0;
+            console.log('w = ' + plyr + ' L = ' + com + ' D = ' + drw);
+            for(i = 0; i < numRounds; i++) {
+                playerSelection = prompt("Rock, Paper, or Scissors?");
+                res = playRound(playerSelection, computerPlay());
+                if (res === 'Error') {
+                    console.log('An error has occurred');
+                } else {
+                    switch (res) {
+                        case 'd':
+                            drw++;                            
+                            break;
+                        case 'w':
+                            plyr++;
+                            break;
+                        case 'l':
+                            com++;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                console.log('w = ' + plyr + ' L = ' + com + ' D = ' + drw);
+            }
+            let resMessage;
+            console.log('w = ' + plyr + ' L = ' + com + ' D = ' + drw);
+            if(plyr > com && plyr > drw) {                
+                resMessage = 'You have won!';
+                
+            } else if (com > plyr && com > drw) {
+                resMessage = 'You have lost!';
+            } else {
+                resMessage = 'No winner.';
+            }
+            document.getElementById('result').innerHTML = resMessage;
+            document.getElementById('win').innerHTML = "You won " + plyr + " round(s).";
+            document.getElementById('loss').innerHTML = "You lost " + com + " round(s).";
+            document.getElementById('draw').innerHTML = "You tied " + drw + " round(s).";
+            console.log(resMessage);
+        }
+        game();
+    </script>
+</body>
+</html>
